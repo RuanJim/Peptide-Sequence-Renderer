@@ -93,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SpotfireDeveloper.snk" />
+    <Content Include="lib\Spotfire.Dxp.Application.dll" />
+    <Content Include="lib\Spotfire.Dxp.Data.dll" />
+    <Content Include="lib\Spotfire.Dxp.Framework.dll" />
     <Content Include="module.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
