@@ -10,6 +10,9 @@ namespace PeptideSequenceRenderer
     /// </summary>
     public sealed class CustomAddIn : AddIn
     {
-        // Override methods in this class to register your extensions.
+        protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
+        {
+            base.RegisterValueRenderers(registrar);
+        }
     }
 }
