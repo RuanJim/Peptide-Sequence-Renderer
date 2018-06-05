@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeptideSequenceRenderer.Properties {
+namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PeptideSequenceRenderer.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PeptideSequenceRenderer.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

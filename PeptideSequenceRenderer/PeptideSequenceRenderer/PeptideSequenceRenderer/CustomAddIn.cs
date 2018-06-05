@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Spotfire.Dxp.Application;
 using Spotfire.Dxp.Application.Extension;
 
-namespace PeptideSequenceRenderer
+namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
 {
     /// <summary>
     /// </summary>
