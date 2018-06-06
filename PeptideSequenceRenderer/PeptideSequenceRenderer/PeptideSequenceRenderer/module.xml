@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
   <id>ac9ff521-931a-48eb-89cf-c8c45c976b61</id>
-  <name>PeptideSequenceRenderer</name>
+  <name>Peptide Sequence Renderer</name>
   <version>1.0</version>
   <assemblies>
     <assembly>
-      <fullname>PeptideSequenceRenderer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d95002c27fab778</fullname>
-      <codebase>PeptideSequenceRenderer.dll</codebase>
+      <fullname>Com.PerkinElmer.Service.PeptideSequenceRenderer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d95002c27fab778</fullname>
+      <codebase>Com.PerkinElmer.Service.PeptideSequenceRenderer.dll</codebase>
       <compatibility>
         <min-version>0.0.0.0</min-version>
         <max-version>#.#.*.*</max-version>
@@ -14,6 +14,6 @@
     </assembly>
   </assemblies>
   <extensions>
-    <addIn fullTypeName="PeptideSequenceRenderer.CustomAddIn, PeptideSequenceRenderer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d95002c27fab778" />
+    <addIn fullTypeName="Com.PerkinElmer.Service.PeptideSequenceRenderer.CustomAddIn, Com.PerkinElmer.Service.PeptideSequenceRenderer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d95002c27fab778" />
   </extensions>
 </module>
