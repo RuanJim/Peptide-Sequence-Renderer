@@ -19,7 +19,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
         private readonly PreferenceProperty<string> _defaultBackgroundColor;
         private readonly PreferenceProperty<string> _branchMonomerFontColor;
         private readonly PreferenceProperty<string> _branchMonomerBackgroundColor;
-        private readonly PreferenceProperty<string> _font;
+        private readonly PreferenceProperty<string[]> _font;
 
         public override string Category => "Peptide Sequence Renderer";
 
@@ -63,11 +63,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
                 PreferencePersistenceScope.Server,
                 PreferenceUsage.UserGroup));
 
-            _font = AddPreference(new PreferenceProperty<string>(
+            _font = AddPreference(new PreferenceProperty<string[]>(
                 "Font",
                 "1.0",
                 PreferencePersistenceScope.Server,
-                PreferenceUsage.UserGroup));
+                PreferenceUsage.UserGroup,
+                new string[] { "Arial", "Tahoma" }));
         }
 
         public int MaxAminoAcids
@@ -106,7 +107,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
             set { _branchMonomerBackgroundColor.Value = value; }
         }
 
-        public string Font
+        public string[] Font
         {
             get { return _font.Value; }
             set { _font.Value = value; }

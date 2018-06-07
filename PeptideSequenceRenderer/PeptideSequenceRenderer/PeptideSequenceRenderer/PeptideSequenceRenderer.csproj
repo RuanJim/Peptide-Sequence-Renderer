@@ -12,7 +12,7 @@
     <AssemblyName>Com.PerkinElmer.Service.PeptideSequenceRenderer</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SpotfireDeveloper.snk</AssemblyOriginatorKeyFile>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -60,14 +60,17 @@
     <Reference Include="Spotfire.Dxp.Application">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\DxpProjects\Binaries\Spotfire.Dxp.Application.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Spotfire.Dxp.Data">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\DxpProjects\Binaries\Spotfire.Dxp.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Spotfire.Dxp.Framework">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\DxpProjects\Binaries\Spotfire.Dxp.Framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

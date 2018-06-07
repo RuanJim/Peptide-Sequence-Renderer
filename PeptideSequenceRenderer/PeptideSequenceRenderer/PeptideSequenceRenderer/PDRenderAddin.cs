@@ -3,6 +3,10 @@ using System.Windows.Forms;
 
 using Spotfire.Dxp.Application;
 using Spotfire.Dxp.Application.Extension;
+using Spotfire.Dxp.Application.Visuals;
+using Spotfire.Dxp.Data;
+using Spotfire.Dxp.Framework.Persistence;
+using Spotfire.Dxp.Framework.Preferences;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
 {
@@ -10,11 +14,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
     /// </summary>
     public sealed class PDRenderAddin : AddIn
     {
-        protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
-        {
-            base.RegisterValueRenderers(registrar);
-        }
-
         protected override void RegisterPreferences(PreferenceRegistrar registrar)
         {
             base.RegisterPreferences(registrar);
