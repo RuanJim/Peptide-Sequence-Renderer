@@ -10,6 +10,13 @@ using Spotfire.Dxp.Framework.Persistence;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
 {
+    public enum Fonts
+    {
+        Arial,
+        Tahoma,
+        Courier
+    }
+
     [PersistenceVersion(1, 0)]
     public class PDRenderPreference : CustomPreference
     {
@@ -19,7 +26,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
         private readonly PreferenceProperty<string> _defaultBackgroundColor;
         private readonly PreferenceProperty<string> _branchMonomerFontColor;
         private readonly PreferenceProperty<string> _branchMonomerBackgroundColor;
-        private readonly PreferenceProperty<string[]> _font;
+        private readonly PreferenceProperty<Fonts> _font;
 
         public override string Category => "Peptide Sequence Renderer";
 
@@ -63,12 +70,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
                 PreferencePersistenceScope.Server,
                 PreferenceUsage.UserGroup));
 
-            _font = AddPreference(new PreferenceProperty<string[]>(
+            _font = AddPreference(new PreferenceProperty<Fonts>(
                 "Font",
                 "1.0",
                 PreferencePersistenceScope.Server,
                 PreferenceUsage.UserGroup,
-                new string[] { "Arial", "Tahoma" }));
+                Fonts.Arial));
         }
 
         public int MaxAminoAcids
@@ -107,7 +114,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
             set { _branchMonomerBackgroundColor.Value = value; }
         }
 
-        public string[] Font
+        public Fonts Font
         {
             get { return _font.Value; }
             set { _font.Value = value; }
