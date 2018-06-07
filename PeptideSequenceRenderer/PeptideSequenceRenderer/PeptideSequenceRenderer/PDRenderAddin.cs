@@ -19,7 +19,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         {
             base.RegisterPreferences(registrar);
 
-
+            registrar.Register<Preference.PDRenderPreference>();
         }
 
         protected override void OnUserServicesRegistered(ServiceProvider serviceProvider)
