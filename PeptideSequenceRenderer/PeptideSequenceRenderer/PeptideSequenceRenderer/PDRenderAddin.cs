@@ -17,6 +17,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         public const int DefaultMaxAcidAmount = 20;
         public const int DefaultFontSize = 12;
 
+        protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
+        {
+            base.RegisterValueRenderers(registrar);
+        }
+
         protected override void RegisterPreferences(PreferenceRegistrar registrar)
         {
             base.RegisterPreferences(registrar);
