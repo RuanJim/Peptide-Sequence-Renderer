@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="License\PDRendererLicense.cs" />
     <Compile Include="Models\PDRenderSettings.cs" />
     <Compile Include="PDRenderAddin.cs" />
     <Compile Include="Preference\PDRenderPreference.cs" />
