@@ -14,6 +14,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
     /// </summary>
     public sealed class PDRenderAddin : AddIn
     {
+        public const int DefaultMaxAcidAmount = 20;
+        public const int DefaultFontSize = 12;
+
         protected override void RegisterPreferences(PreferenceRegistrar registrar)
         {
             base.RegisterPreferences(registrar);
