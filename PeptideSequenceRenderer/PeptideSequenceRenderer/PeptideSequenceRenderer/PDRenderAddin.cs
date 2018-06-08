@@ -24,6 +24,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
             registrar.Register<Preference.PDRenderPreference>();
         }
 
+        protected override void RegisterViews(ViewRegistrar registrar)
+        {
+            base.RegisterViews(registrar);
+
+            registrar.Register(typeof(Form), typeof(Models.PDRenderSettings), typeof(Views.PDRendererSettingsDialog));
+        }
+
         protected override void OnUserServicesRegistered(ServiceProvider serviceProvider)
         {
             base.OnUserServicesRegistered(serviceProvider);
