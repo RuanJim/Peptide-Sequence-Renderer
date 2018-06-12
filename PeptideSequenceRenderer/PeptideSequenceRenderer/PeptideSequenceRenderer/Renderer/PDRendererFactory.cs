@@ -23,7 +23,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
         protected override float GetRendererMatchCore(DataValueProperties dataValueProperties)
         {
-            return 0f;
+            return 25.0f;
         }
     }
 }
