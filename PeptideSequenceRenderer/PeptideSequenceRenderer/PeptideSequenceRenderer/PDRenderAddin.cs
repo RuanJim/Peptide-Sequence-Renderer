@@ -20,6 +20,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
         {
             base.RegisterValueRenderers(registrar);
+
+            registrar.Register(new Renderer.PDRendererFactory());
         }
 
         protected override void RegisterPreferences(PreferenceRegistrar registrar)

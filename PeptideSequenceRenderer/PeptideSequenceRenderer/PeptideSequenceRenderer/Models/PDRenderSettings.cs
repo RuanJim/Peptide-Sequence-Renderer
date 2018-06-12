@@ -1,5 +1,6 @@
 ﻿using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Framework.DocumentModel;
+using Spotfire.Dxp.Framework.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 {
+    [Serializable]
+    [PersistenceVersion(3, 000)]
     public sealed class PDRenderSettings : CustomValueRendererSettings
     {
         private readonly UndoableProperty<int> maxAcidAmount;
