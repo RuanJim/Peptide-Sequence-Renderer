@@ -12,6 +12,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
 {
     public partial class PDRendererSettingsDialog : Form
     {
+        public PDRendererSettingsDialog(Models.PDRenderSettings model)
+        {
+        }
+
         public PDRendererSettingsDialog()
         {
             InitializeComponent();

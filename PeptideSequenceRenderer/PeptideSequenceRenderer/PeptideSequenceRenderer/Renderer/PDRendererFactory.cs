@@ -6,23 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference;
 using Spotfire.Dxp.Data;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 {
-    public sealed class PDRendererFactory : CustomValueRendererFactory<PDRenderer, PDRendererSettings>
+    public sealed class PDRendererFactory : CustomValueRendererFactory<PDRenderer, Models.PDRenderSettings>
     {
         public PDRendererFactory() : base(PDRendererIdentifiers.PDRendererTypeIdentifier, null)
         {
         }
 
-        protected override PDRendererSettings CreateRendererSettingsCore()
+        protected override PDRenderSettings CreateRendererSettingsCore()
         {
-            throw new NotImplementedException();
+            return new PDRenderSettings();
         }
 
         protected override float GetRendererMatchCore(DataValueProperties dataValueProperties)
         {
-            throw new NotImplementedException();
+            return 0f;
         }
     }
 }
