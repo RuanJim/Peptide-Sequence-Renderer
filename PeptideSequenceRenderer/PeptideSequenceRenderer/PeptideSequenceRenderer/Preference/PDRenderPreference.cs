@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Framework.Preferences;
 using Spotfire.Dxp.Framework.Persistence;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
 {
@@ -28,7 +29,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
         private readonly PreferenceProperty<string> _branchMonomerBackgroundColor;
         private readonly PreferenceProperty<Fonts> _font;
 
-        public override string Category => "Peptide Sequence Renderer";
+        public override string Category => Resources.AddinName;
 
         public override string SubCategory => "Renderer Settings";
 

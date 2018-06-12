@@ -59,5 +59,14 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Peptide Sequence Renderer.
+        /// </summary>
+        internal static string AddinName {
+            get {
+                return ResourceManager.GetString("AddinName", resourceCulture);
+            }
+        }
     }
 }

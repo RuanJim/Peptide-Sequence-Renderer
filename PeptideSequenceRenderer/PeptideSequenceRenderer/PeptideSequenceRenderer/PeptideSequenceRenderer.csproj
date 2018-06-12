@@ -89,6 +89,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Renderer\PDRenderer.cs" />
+    <Compile Include="Renderer\PDRendererFactory.cs" />
+    <Compile Include="Renderer\PDRendererIdentifiers.cs" />
+    <Compile Include="Renderer\PDRendererSettings.cs" />
     <Compile Include="Views\PDRendererSettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>

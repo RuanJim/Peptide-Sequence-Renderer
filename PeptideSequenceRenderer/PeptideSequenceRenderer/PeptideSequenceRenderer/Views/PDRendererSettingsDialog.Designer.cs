@@ -1,4 +1,6 @@
-﻿namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
+﻿using Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties;
+
+namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
 {
     partial class PDRendererSettingsDialog
     {
@@ -106,7 +108,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Peptide Sequence Renderer";
+            this.Text = Resources.AddinName;
             this.ResumeLayout(false);
             this.PerformLayout();
 
