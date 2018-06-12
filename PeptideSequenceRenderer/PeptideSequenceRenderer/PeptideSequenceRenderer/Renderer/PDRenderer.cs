@@ -12,6 +12,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
     {
         protected override void RenderCore(ValueRendererSettings rendererSettings, ValueRendererArgs args, ValueRendererResult renderingResult)
         {
+            renderingResult.SetImage(System.Drawing.Image.FromFile(@"H:\1.png"));
         }
     }
 }
