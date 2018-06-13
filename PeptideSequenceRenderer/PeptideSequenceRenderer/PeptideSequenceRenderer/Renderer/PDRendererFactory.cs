@@ -10,12 +10,10 @@
 //     that authorizes such use.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 #region
 
 using System;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
-using Spotfire.Dxp.Application;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Data;
 using Spotfire.Dxp.Framework.Threading;
@@ -30,13 +28,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
         }
 
-        protected override bool SupportsCreateRendererCore
-        {
-            get
-            {
-                return true;
-            }
-        }
+        protected override bool SupportsCreateRendererCore => true;
 
         protected override PDRenderer CreateRendererCore()
         {
@@ -50,18 +42,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
         protected override CachingBehavior GetCachingBehaviorCore()
         {
-            return CachingBehavior.Global;
+            return CachingBehavior.None;
         }
 
         protected override object GetModelKeyCore(PDRenderSettings settings)
         {
-            var document = settings.Context.GetService<Document>();
-
-            var table = document.ActiveDataTableReference;
-
-            // All fields that are read in RenderCore must be part of the cache key for the model.
-            string partSeparator = " , ";
-            return settings.MaxAcidAmount + partSeparator + settings.FontSize;
+            return $"{settings.MaxAcidAmount},{settings.FontSize},{settings.DefaultFontColor},{settings.DefaultBackgroundColor},{settings.BranchMonomerFontColor},{settings.BranchMonomerBackgroundColor}";
         }
 
         protected override float GetRendererMatchCore(DataValueProperties dataValueProperties)
