@@ -10,10 +10,11 @@
 //     that authorizes such use.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 #region
 
+using System;
 using System.Windows.Forms;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
 
 #endregion
 
@@ -21,13 +22,24 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
 {
     public partial class PDRendererSettingsDialog : Form
     {
-        public PDRendererSettingsDialog(Models.PDRenderSettings model)
+        private readonly PDRenderSettings _model;
+
+        public PDRendererSettingsDialog(PDRenderSettings model)
         {
+            InitializeComponent();
+
+            this._model = model;
         }
 
         public PDRendererSettingsDialog()
         {
             InitializeComponent();
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            _model.FontSize = int.Parse(fontSizeTextBox.Text);
+            _model.MaxAcidAmount = int.Parse(acidNumberTextBox.Text);
         }
     }
 }

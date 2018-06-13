@@ -65,6 +65,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
@@ -108,7 +109,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Resources.AddinName;
+            this.Text = "Peptide Sequence Renderer";
             this.ResumeLayout(false);
             this.PerformLayout();
 
