@@ -16,6 +16,8 @@ using System;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Data;
+using Spotfire.Dxp.Framework.Preferences;
+using Spotfire.Dxp.Framework.Services;
 using Spotfire.Dxp.Framework.Threading;
 
 #endregion
@@ -37,7 +39,32 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
         protected override PDRenderSettings CreateRendererSettingsCore()
         {
-            return new PDRenderSettings();
+            var settings = new PDRenderSettings();
+
+            var preferenceManager = settings.GetService<PreferenceManager>();
+
+            var preference = preferenceManager.GetPreference<Preference.PDRenderPreference>();
+
+            //TODO: which one has a higher priority? admin preference or personal settings?
+            settings.MaxAcidAmount = preference.MaxAminoAcids;
+
+            settings.DefaultFontColor = string.IsNullOrEmpty(preference.DefaultFontColor)
+                ? settings.DefaultFontColor
+                : preference.DefaultFontColor;
+
+            settings.DefaultBackgroundColor = string.IsNullOrEmpty(preference.DefaultBackgroundColor)
+                ? settings.DefaultBackgroundColor
+                : preference.DefaultBackgroundColor;
+
+            settings.BranchMonomerFontColor = string.IsNullOrEmpty(preference.BranchMonomerFontColor)
+                ? settings.BranchMonomerFontColor
+                : preference.BranchMonomerFontColor;
+
+            settings.BranchMonomerBackgroundColor = string.IsNullOrEmpty(preference.BranchMonomerBackgroundColor)
+                ? settings.BranchMonomerBackgroundColor
+                : preference.BranchMonomerBackgroundColor;
+
+            return settings;
         }
 
         protected override CachingBehavior GetCachingBehaviorCore()

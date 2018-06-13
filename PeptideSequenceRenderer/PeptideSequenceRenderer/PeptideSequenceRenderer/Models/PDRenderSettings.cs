@@ -27,87 +27,85 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
     [PersistenceVersion(3, 000)]
     public sealed class PDRenderSettings : CustomValueRendererSettings
     {
-        private readonly UndoableProperty<string> branchMonomerBackgroundColor;
+        private readonly UndoableProperty<string> _branchMonomerBackgroundColor;
 
-        private readonly UndoableProperty<string> branchMonomerFontColor;
+        private readonly UndoableProperty<string> _branchMonomerFontColor;
 
-        private readonly UndoableProperty<string> defaultBackgroundColor;
+        private readonly UndoableProperty<string> _defaultBackgroundColor;
 
-        private readonly UndoableProperty<string> defaultFontColor;
+        private readonly UndoableProperty<string> _defaultFontColor;
 
-        private readonly UndoableProperty<int> fontSize;
-        private readonly UndoableProperty<int> maxAcidAmount;
+        private readonly UndoableProperty<int> _fontSize;
+
+        private readonly UndoableProperty<int> _maxAcidAmount;
 
         public PDRenderSettings()
         {
-            CreateProperty(PropertyNames.MaxAcidAmount, out maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
-            CreateProperty(PropertyNames.FontSize, out fontSize, PDRenderAddin.DefaultFontSize);
-
-            // TODO: set these values.
-
-            CreateProperty(PropertyNames.DefaultFontColor, out defaultFontColor, string.Empty);
-            CreateProperty(PropertyNames.DefaultBackgroundColor, out defaultBackgroundColor, string.Empty);
-            CreateProperty(PropertyNames.BranchMonomerFontColor, out branchMonomerFontColor, string.Empty);
-            CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out branchMonomerBackgroundColor, string.Empty);
+            CreateProperty(PropertyNames.MaxAcidAmount, out _maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
+            CreateProperty(PropertyNames.FontSize, out _fontSize, PDRenderAddin.DefaultFontSize);
+            CreateProperty(PropertyNames.DefaultFontColor, out _defaultFontColor, "#000000");
+            CreateProperty(PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor, "#FFFFFF");
+            CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
+            CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor, "#FFFFFF");
         }
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            DeserializeProperty<int>(info, context, PropertyNames.MaxAcidAmount, out maxAcidAmount);
-            DeserializeProperty<int>(info, context, PropertyNames.FontSize, out fontSize);
+            DeserializeProperty<int>(info, context, PropertyNames.MaxAcidAmount, out _maxAcidAmount);
+            DeserializeProperty<int>(info, context, PropertyNames.FontSize, out _fontSize);
 
-            DeserializeProperty<string>(info, context, PropertyNames.DefaultFontColor, out defaultFontColor);
-            DeserializeProperty<string>(info, context, PropertyNames.DefaultBackgroundColor, out defaultBackgroundColor);
-            DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerFontColor, out branchMonomerFontColor);
-            DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out branchMonomerBackgroundColor);
+            DeserializeProperty<string>(info, context, PropertyNames.DefaultFontColor, out _defaultFontColor);
+            DeserializeProperty<string>(info, context, PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor);
+            DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor);
+            DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor);
         }
 
         public int MaxAcidAmount
         {
-            get { return maxAcidAmount.Value; }
-            set { maxAcidAmount.Value = value; }
+            get { return _maxAcidAmount.Value; }
+            set { _maxAcidAmount.Value = value; }
         }
 
         public int FontSize
         {
-            get { return fontSize.Value; }
-            set { fontSize.Value = value; }
+            get { return _fontSize.Value; }
+            set { _fontSize.Value = value; }
         }
 
         public string DefaultFontColor
         {
-            get { return defaultFontColor.Value; }
-            set { defaultFontColor.Value = value; }
+            get { return _defaultFontColor.Value; }
+            set { _defaultFontColor.Value = value; }
         }
 
         public string DefaultBackgroundColor
         {
-            get { return defaultBackgroundColor.Value; }
-            set { defaultBackgroundColor.Value = value; }
+            get { return _defaultBackgroundColor.Value; }
+            set { _defaultBackgroundColor.Value = value; }
         }
 
         public string BranchMonomerFontColor
         {
-            get { return branchMonomerFontColor.Value; }
-            set { branchMonomerFontColor.Value = value; }
+            get { return _branchMonomerFontColor.Value; }
+            set { _branchMonomerFontColor.Value = value; }
         }
 
         public string BranchMonomerBackgroundColor
         {
-            get { return branchMonomerBackgroundColor.Value; }
-            set { branchMonomerBackgroundColor.Value = value; }
+            get { return _branchMonomerBackgroundColor.Value; }
+            set { _branchMonomerBackgroundColor.Value = value; }
         }
 
         protected override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
-            SerializeProperty<int>(info, context, maxAcidAmount);
-            SerializeProperty<int>(info, context, fontSize);
-            SerializeProperty<string>(info, context, defaultFontColor);
-            SerializeProperty<string>(info, context, defaultBackgroundColor);
-            SerializeProperty<string>(info, context, branchMonomerFontColor);
-            SerializeProperty<string>(info, context, branchMonomerBackgroundColor);
+            SerializeProperty<int>(info, context, _maxAcidAmount);
+            SerializeProperty<int>(info, context, _fontSize);
+            SerializeProperty<string>(info, context, _defaultFontColor);
+            SerializeProperty<string>(info, context, _defaultBackgroundColor);
+            SerializeProperty<string>(info, context, _branchMonomerFontColor);
+            SerializeProperty<string>(info, context, _branchMonomerBackgroundColor);
         }
 
         protected override Trigger GetRenderTriggerCore()
