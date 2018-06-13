@@ -42,7 +42,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
         protected override CachingBehavior GetCachingBehaviorCore()
         {
-            return CachingBehavior.None;
+            return CachingBehavior.Global;
         }
 
         protected override object GetModelKeyCore(PDRenderSettings settings)

@@ -13,9 +13,15 @@
 
 #region
 
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference;
 using Spotfire.Dxp.Application.Extension;
+using Spotfire.Dxp.Data;
+using Spotfire.Dxp.Data.Import;
+using Spotfire.Dxp.Framework.Preferences;
 
 #endregion
 
@@ -28,7 +34,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         public const int DefaultMaxAcidAmount = 20;
         public const int DefaultFontSize = 12;
 
-        public static Dictionary<string, string> MonomerColorTable => new Dictionary<string, string>();
+        public static Dictionary<string, ColorSetting> MonomerColorTable { get; } = new Dictionary<string, ColorSetting>();
 
         protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
         {
@@ -51,9 +57,50 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
             registrar.Register(typeof(Form), typeof(Models.PDRenderSettings), typeof(Views.PDRendererSettingsDialog));
         }
 
-        protected override void OnUserServicesRegistered(ServiceProvider serviceProvider)
+        protected override void OnAnalysisServicesRegistered(ServiceProvider serviceProvider)
         {
-            base.OnUserServicesRegistered(serviceProvider);
+            base.OnAnalysisServicesRegistered(serviceProvider);
+
+            GetMonomerColorTable(serviceProvider);
+        }
+
+        private static void GetMonomerColorTable(ServiceProvider serviceProvider)
+        {
+            MonomerColorTable.Clear();
+
+            var preferenceManager = (PreferenceManager)serviceProvider.GetService(typeof(PreferenceManager));
+
+            if (preferenceManager == null)
+            {
+                return;
+            }
+
+            var preference = preferenceManager.GetPreference<PDRenderPreference>();
+
+            var informationLinkID = preference.ColorCodingInformationLinkGuid;
+
+            var informationLinkDescriptor =
+                InformationLinkDataSource.GetInformationLinkDescriptor(new Guid(informationLinkID));
+
+            var informationLinkDataSource =
+                new InformationLinkDataSource(informationLinkDescriptor.Identifier);
+
+            using (var connection = informationLinkDataSource.Connect(serviceProvider, DataSourcePromptMode.None))
+            using (var reader = connection.ExecuteQuery2())
+            {
+                while (reader.MoveNext())
+                {
+                    var monomer = reader.Columns[0].Cursor.CurrentDataValue.ValidValue.ToString();
+                    var foreColor = reader.Columns[1].Cursor.CurrentDataValue.ValidValue.ToString();
+                    var backColor = reader.Columns[2].Cursor.CurrentDataValue.ValidValue.ToString();
+
+                    MonomerColorTable.Add(monomer, new ColorSetting
+                    {
+                        ForeColor = foreColor,
+                        BackgroundColor = backColor
+                    });
+                }
+            }
         }
     }
 }
