@@ -111,6 +111,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="PeptideSequenceRenderer.bat" />
+    <None Include="PeptideSequenceRenderer.pkdesc" />
     <None Include="SpotfireDeveloper.snk" />
     <Content Include="lib\Spotfire.Dxp.Application.dll" />
     <Content Include="lib\Spotfire.Dxp.Data.dll" />
