@@ -117,6 +117,7 @@
     <Content Include="lib\Spotfire.Dxp.Application.dll" />
     <Content Include="lib\Spotfire.Dxp.Data.dll" />
     <Content Include="lib\Spotfire.Dxp.Framework.dll" />
+    <Content Include="lib\Spotfire.Dxp.Internal.dll" />
     <Content Include="module.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
