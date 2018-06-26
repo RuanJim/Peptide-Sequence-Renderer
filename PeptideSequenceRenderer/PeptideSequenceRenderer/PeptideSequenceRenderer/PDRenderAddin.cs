@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference;
@@ -111,9 +112,21 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
 
                 ColorCodeTableLoaded = true;
             }
-            catch
+            catch (Exception ex)
             {
-                // TODO: Store error message in windows event logs.
+                var sourceName = "Peptide Sequence Renderer";
+
+                if (!EventLog.SourceExists(sourceName))
+                {
+                    EventLog.CreateEventSource(sourceName, "Information Link");
+                }
+
+                EventLog log = new EventLog
+                {
+                    Source = sourceName
+                };
+
+                log.WriteEntry(ex.Message);
             }
         }
     }
