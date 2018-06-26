@@ -13,6 +13,7 @@
 
 #region
 
+using System;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Framework.Persistence;
@@ -22,6 +23,8 @@ using Spotfire.Dxp.Framework.Preferences;
 
 namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
 {
+    [Serializable]
+    [PersistenceVersion(1, 0)]
     public enum Fonts
     {
         Arial,
@@ -46,8 +49,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
                 "Max number of amino acids", 
                 "1.0", 
                 PreferencePersistenceScope.Server, 
-                PreferenceUsage.UserGroup,
-                PDRenderAddin.DefaultFontSize));
+                PreferenceUsage.UserGroup));
 
             _colorCodingInformationLinkGuid = AddPreference(new PreferenceProperty<string>(
                 "Color coding Information Link GUID", 
@@ -83,8 +85,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
                 "Font",
                 "1.0",
                 PreferencePersistenceScope.Server,
-                PreferenceUsage.UserGroup,
-                Fonts.Arial));
+                PreferenceUsage.UserGroup));
         }
 
         public override string Category => Resources.AddinName;
