@@ -120,4 +120,10 @@
   <data name="AddinName" xml:space="preserve">
     <value>Peptide Sequence Renderer</value>
   </data>
+  <data name="PDRenderAddin_GetMonomerColorTable_Can_t_load_color_code_via_information_link__please_check_your_preference_" xml:space="preserve">
+    <value>Can't load color code via information link, please check your preference.</value>
+  </data>
+  <data name="InformationLinkError" xml:space="preserve">
+    <value>Can't load color code via information link, please check your preference.</value>
+  </data>
 </root>

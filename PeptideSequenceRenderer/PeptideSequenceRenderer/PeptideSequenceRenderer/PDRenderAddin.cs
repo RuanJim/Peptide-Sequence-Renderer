@@ -34,7 +34,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         public const int DefaultMaxAcidAmount = 20;
         public const int DefaultFontSize = 12;
 
-        public static Dictionary<string, ColorSetting> MonomerColorTable { get; } = new Dictionary<string, ColorSetting>();
+        public static bool ColorCodeTableLoaded = false;
+
+        public static Dictionary<string, ColorSetting> MonomerColorTable { get; } =
+            new Dictionary<string, ColorSetting>();
+
+        public static PDRenderPreference RendererPreference;
 
         protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
         {
@@ -68,38 +73,47 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         {
             MonomerColorTable.Clear();
 
-            var preferenceManager = (PreferenceManager)serviceProvider.GetService(typeof(PreferenceManager));
+            var preferenceManager = (PreferenceManager) serviceProvider.GetService(typeof(PreferenceManager));
 
             if (preferenceManager == null)
             {
                 return;
             }
 
-            var preference = preferenceManager.GetPreference<PDRenderPreference>();
+            RendererPreference = preferenceManager.GetPreference<PDRenderPreference>();
 
-            var informationLinkID = preference.ColorCodingInformationLinkGuid;
-
-            var informationLinkDescriptor =
-                InformationLinkDataSource.GetInformationLinkDescriptor(new Guid(informationLinkID));
-
-            var informationLinkDataSource =
-                new InformationLinkDataSource(informationLinkDescriptor.Identifier);
-
-            using (var connection = informationLinkDataSource.Connect(serviceProvider, DataSourcePromptMode.None))
-            using (var reader = connection.ExecuteQuery2())
+            try
             {
-                while (reader.MoveNext())
-                {
-                    var monomer = reader.Columns[0].Cursor.CurrentDataValue.ValidValue.ToString();
-                    var foreColor = reader.Columns[1].Cursor.CurrentDataValue.ValidValue.ToString();
-                    var backColor = reader.Columns[2].Cursor.CurrentDataValue.ValidValue.ToString();
+                var informationLinkID = RendererPreference.ColorCodingInformationLinkGuid;
 
-                    MonomerColorTable.Add(monomer, new ColorSetting
+                var informationLinkDescriptor =
+                    InformationLinkDataSource.GetInformationLinkDescriptor(new Guid(informationLinkID));
+
+                var informationLinkDataSource =
+                    new InformationLinkDataSource(informationLinkDescriptor.Identifier);
+
+                using (var connection = informationLinkDataSource.Connect(serviceProvider, DataSourcePromptMode.None))
+                using (var reader = connection.ExecuteQuery2())
+                {
+                    while (reader.MoveNext())
                     {
-                        ForeColor = foreColor,
-                        BackgroundColor = backColor
-                    });
+                        var monomer = reader.Columns[0].Cursor.CurrentDataValue.ValidValue.ToString();
+                        var foreColor = reader.Columns[1].Cursor.CurrentDataValue.ValidValue.ToString();
+                        var backColor = reader.Columns[2].Cursor.CurrentDataValue.ValidValue.ToString();
+
+                        MonomerColorTable.Add(monomer, new ColorSetting
+                        {
+                            ForeColor = foreColor,
+                            BackgroundColor = backColor
+                        });
+                    }
                 }
+
+                ColorCodeTableLoaded = true;
+            }
+            catch
+            {
+                // TODO: Store error message in windows event logs.
             }
         }
     }

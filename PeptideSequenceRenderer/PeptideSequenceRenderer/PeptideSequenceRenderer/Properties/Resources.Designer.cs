@@ -68,5 +68,24 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Properties {
                 return ResourceManager.GetString("AddinName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t load color code via information link, please check your preference..
+        /// </summary>
+        internal static string InformationLinkError {
+            get {
+                return ResourceManager.GetString("InformationLinkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t load color code via information link, please check your preference..
+        /// </summary>
+        internal static string PDRenderAddin_GetMonomerColorTable_Can_t_load_color_code_via_information_link__please_check_your_preference_ {
+            get {
+                return ResourceManager.GetString("PDRenderAddin_GetMonomerColorTable_Can_t_load_color_code_via_information_link__pl" +
+                        "ease_check_your_preference_", resourceCulture);
+            }
+        }
     }
 }

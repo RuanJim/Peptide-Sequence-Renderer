@@ -41,28 +41,24 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             var settings = new PDRenderSettings();
 
-            var preferenceManager = settings.GetService<PreferenceManager>();
-
-            var preference = preferenceManager.GetPreference<Preference.PDRenderPreference>();
-
             //TODO: which one has a higher priority? admin preference or personal settings?
-            settings.MaxAcidAmount = preference.MaxAminoAcids;
+            settings.MaxAcidAmount = PDRenderAddin.RendererPreference.MaxAminoAcids;
 
-            settings.DefaultFontColor = string.IsNullOrEmpty(preference.DefaultFontColor)
+            settings.DefaultFontColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.DefaultFontColor)
                 ? settings.DefaultFontColor
-                : preference.DefaultFontColor;
+                : PDRenderAddin.RendererPreference.DefaultFontColor;
 
-            settings.DefaultBackgroundColor = string.IsNullOrEmpty(preference.DefaultBackgroundColor)
+            settings.DefaultBackgroundColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.DefaultBackgroundColor)
                 ? settings.DefaultBackgroundColor
-                : preference.DefaultBackgroundColor;
+                : PDRenderAddin.RendererPreference.DefaultBackgroundColor;
 
-            settings.BranchMonomerFontColor = string.IsNullOrEmpty(preference.BranchMonomerFontColor)
+            settings.BranchMonomerFontColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.BranchMonomerFontColor)
                 ? settings.BranchMonomerFontColor
-                : preference.BranchMonomerFontColor;
+                : PDRenderAddin.RendererPreference.BranchMonomerFontColor;
 
-            settings.BranchMonomerBackgroundColor = string.IsNullOrEmpty(preference.BranchMonomerBackgroundColor)
+            settings.BranchMonomerBackgroundColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.BranchMonomerBackgroundColor)
                 ? settings.BranchMonomerBackgroundColor
-                : preference.BranchMonomerBackgroundColor;
+                : PDRenderAddin.RendererPreference.BranchMonomerBackgroundColor;
 
             return settings;
         }
