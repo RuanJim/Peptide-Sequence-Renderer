@@ -54,7 +54,27 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 {
                     string monomer = peptideList[i].Replace("[", string.Empty).Replace("]", string.Empty);
 
-                    var color = PDRenderAddin.MonomerColorTable[monomer];
+                    ColorSetting color = new ColorSetting
+                    {
+                        ForeColor = settings.DefaultFontColor,
+                        BackgroundColor = settings.DefaultBackgroundColor
+                    };
+
+                    if (PDRenderAddin.MonomerColorTable.ContainsKey(monomer))
+                    {
+                        color = PDRenderAddin.MonomerColorTable[monomer];
+                    }
+
+                    if (monomer.StartsWith("(") && monomer.EndsWith(")"))
+                    {
+                        color = new ColorSetting
+                        {
+                            ForeColor = settings.BranchMonomerFontColor,
+                            BackgroundColor = settings.BranchMonomerBackgroundColor
+                        };
+                    }
+
+                    monomer = monomer.Replace("(", string.Empty).Replace(")", string.Empty);
 
                     Rectangle rect = new Rectangle(i * cellSize, 0, cellSize, cellSize);
 
