@@ -14,6 +14,7 @@
 
 using System;
 using Com.PerkinElmer.Service.PeptideSequenceRenderer.Models;
+using Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Data;
 using Spotfire.Dxp.Framework.Preferences;
@@ -41,27 +42,29 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             var settings = new PDRenderSettings();
 
+            var preference = settings.GetService<PreferenceManager>().GetPreference<PDRenderPreference>();
+
             //TODO: which one has a higher priority? admin preference or personal settings?
-            settings.MaxAcidAmount = PDRenderAddin.RendererPreference.MaxAminoAcids;
-            settings.FontFamily = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.Font.ToString())
+            settings.MaxAcidAmount = preference.MaxAminoAcids;
+            settings.FontFamily = string.IsNullOrEmpty(preference.Font.ToString())
                 ? PDRenderAddin.DefaultFontFamily
-                : PDRenderAddin.RendererPreference.Font.ToString();
+                : preference.Font.ToString();
 
-            settings.DefaultFontColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.DefaultFontColor)
+            settings.DefaultFontColor = string.IsNullOrEmpty(preference.DefaultFontColor)
                 ? settings.DefaultFontColor
-                : PDRenderAddin.RendererPreference.DefaultFontColor;
+                : preference.DefaultFontColor;
 
-            settings.DefaultBackgroundColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.DefaultBackgroundColor)
+            settings.DefaultBackgroundColor = string.IsNullOrEmpty(preference.DefaultBackgroundColor)
                 ? settings.DefaultBackgroundColor
-                : PDRenderAddin.RendererPreference.DefaultBackgroundColor;
+                : preference.DefaultBackgroundColor;
 
-            settings.BranchMonomerFontColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.BranchMonomerFontColor)
+            settings.BranchMonomerFontColor = string.IsNullOrEmpty(preference.BranchMonomerFontColor)
                 ? settings.BranchMonomerFontColor
-                : PDRenderAddin.RendererPreference.BranchMonomerFontColor;
+                : preference.BranchMonomerFontColor;
 
-            settings.BranchMonomerBackgroundColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.BranchMonomerBackgroundColor)
+            settings.BranchMonomerBackgroundColor = string.IsNullOrEmpty(preference.BranchMonomerBackgroundColor)
                 ? settings.BranchMonomerBackgroundColor
-                : PDRenderAddin.RendererPreference.BranchMonomerBackgroundColor;
+                : preference.BranchMonomerBackgroundColor;
 
             return settings;
         }
