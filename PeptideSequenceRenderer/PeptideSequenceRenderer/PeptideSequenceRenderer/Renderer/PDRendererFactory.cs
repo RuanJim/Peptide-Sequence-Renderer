@@ -43,6 +43,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             //TODO: which one has a higher priority? admin preference or personal settings?
             settings.MaxAcidAmount = PDRenderAddin.RendererPreference.MaxAminoAcids;
+            settings.FontFamily = PDRenderAddin.DefaultFontFamily;
 
             settings.DefaultFontColor = string.IsNullOrEmpty(PDRenderAddin.RendererPreference.DefaultFontColor)
                 ? settings.DefaultFontColor

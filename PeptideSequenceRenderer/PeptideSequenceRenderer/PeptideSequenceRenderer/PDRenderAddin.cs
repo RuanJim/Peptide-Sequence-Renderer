@@ -32,17 +32,17 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
     /// </summary>
     public sealed class PDRenderAddin : AddIn
     {
-        public const int DefaultMaxAcidAmount = 20;
-        public const int DefaultFontSize = 12;
-        public static string DefaultFontFamily { get; set; }
+        internal const int DefaultMaxAcidAmount = 20;
+        internal const int DefaultFontSize = 12;
+        internal static string DefaultFontFamily => "Tahoma";
 
-        public static bool ColorCodeTableLoaded = false;
+        internal static bool ColorCodeTableLoaded = false;
 
-        public static Dictionary<string, ColorSetting> MonomerColorTable { get; } =
+        internal static Dictionary<string, ColorSetting> MonomerColorTable { get; } =
             new Dictionary<string, ColorSetting>();
 
 
-        public static PDRenderPreference RendererPreference;
+        internal static PDRenderPreference RendererPreference;
 
         protected override void RegisterValueRenderers(ValueRendererRegistrar registrar)
         {

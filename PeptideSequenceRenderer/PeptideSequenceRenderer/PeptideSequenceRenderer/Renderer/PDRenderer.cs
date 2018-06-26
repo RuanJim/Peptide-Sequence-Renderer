@@ -61,7 +61,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml(color.BackgroundColor)), rect);
                     g.DrawRectangle(new Pen(Color.White), rect);
 
-                    FontFamily fontFamily = new FontFamily("Tahoma");
+                    FontFamily fontFamily = new FontFamily(settings.FontFamily);
 
                     fontFamily.GetEmHeight(FontStyle.Regular);
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
