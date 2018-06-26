@@ -37,12 +37,15 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         private readonly UndoableProperty<int> _fontSize;
 
+        private readonly UndoableProperty<string> _fontFamily;
+
         private readonly UndoableProperty<int> _maxAcidAmount;
 
         public PDRenderSettings()
         {
             CreateProperty(PropertyNames.MaxAcidAmount, out _maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
             CreateProperty(PropertyNames.FontSize, out _fontSize, PDRenderAddin.DefaultFontSize);
+            CreateProperty(PropertyNames.FontFamily, out _fontFamily, PDRenderAddin.DefaultFontFamily);
             CreateProperty(PropertyNames.DefaultFontColor, out _defaultFontColor, "#000000");
             CreateProperty(PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
@@ -53,6 +56,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
         {
             DeserializeProperty<int>(info, context, PropertyNames.MaxAcidAmount, out _maxAcidAmount);
             DeserializeProperty<int>(info, context, PropertyNames.FontSize, out _fontSize);
+            DeserializeProperty<string>(info, context, PropertyNames.FontFamily, out _fontFamily);
 
             DeserializeProperty<string>(info, context, PropertyNames.DefaultFontColor, out _defaultFontColor);
             DeserializeProperty<string>(info, context, PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor);
@@ -70,6 +74,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
         {
             get { return _fontSize.Value; }
             set { _fontSize.Value = value; }
+        }
+
+        public string FontFamily
+        {
+            get { return _fontFamily.Value; }
+            set { _fontFamily.Value = value; }
         }
 
         public string DefaultFontColor
@@ -102,6 +112,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
             SerializeProperty<int>(info, context, _maxAcidAmount);
             SerializeProperty<int>(info, context, _fontSize);
+            SerializeProperty<string>(info, context, _fontFamily);
             SerializeProperty<string>(info, context, _defaultFontColor);
             SerializeProperty<string>(info, context, _defaultBackgroundColor);
             SerializeProperty<string>(info, context, _branchMonomerFontColor);
@@ -113,6 +124,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             return Trigger.CreateCompositeTrigger(
                 Trigger.CreatePropertyTrigger(this, PropertyNames.MaxAcidAmount),
                 Trigger.CreatePropertyTrigger(this, PropertyNames.FontSize),
+                Trigger.CreatePropertyTrigger(this, PropertyNames.FontFamily),
                 Trigger.CreatePropertyTrigger(this, PropertyNames.DefaultFontColor),
                 Trigger.CreatePropertyTrigger(this, PropertyNames.DefaultBackgroundColor),
                 Trigger.CreatePropertyTrigger(this, PropertyNames.BranchMonomerFontColor),
@@ -123,6 +135,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
         {
             public static readonly PropertyName MaxAcidAmount = CreatePropertyName("MaxAcidAmount");
             public static readonly PropertyName FontSize = CreatePropertyName("FontSize");
+            public static readonly PropertyName FontFamily = CreatePropertyName("FontFamily");
             public static readonly PropertyName DefaultFontColor = CreatePropertyName("DefaultFontColor");
             public static readonly PropertyName DefaultBackgroundColor = CreatePropertyName("DefaultBackgroundColor");
             public static readonly PropertyName BranchMonomerFontColor = CreatePropertyName("BranchMonomerFontColor");

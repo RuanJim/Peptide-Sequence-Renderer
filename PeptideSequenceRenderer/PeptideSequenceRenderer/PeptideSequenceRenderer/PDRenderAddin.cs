@@ -34,11 +34,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
     {
         public const int DefaultMaxAcidAmount = 20;
         public const int DefaultFontSize = 12;
+        public static string DefaultFontFamily { get; set; }
 
         public static bool ColorCodeTableLoaded = false;
 
         public static Dictionary<string, ColorSetting> MonomerColorTable { get; } =
             new Dictionary<string, ColorSetting>();
+
 
         public static PDRenderPreference RendererPreference;
 
