@@ -30,9 +30,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
     {
         protected override void RenderCore(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs, ValueRendererResult renderingResult)
         {
-            int cellSize = rendererArgs.Height;
-
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
+
+            int cellHeight = rendererArgs.Height;
+            int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
 
             Regex regex = new Regex(@"PEPTIDE\d+\{(.+?)\}");
 
@@ -66,7 +67,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
-                for (int i = 0; i < peptideList.Count; i++)
+                for (int i = 0; i < peptideList.Count && i < settings.MaxAcidAmount; i++)
                 {
                     string monomer = peptideList[i].Replace("[", string.Empty).Replace("]", string.Empty);
 
@@ -102,7 +103,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     monomer = monomer.Replace("(", string.Empty).Replace(")", string.Empty);
                     monomer = monomer.Replace("#", string.Empty).Replace("#", string.Empty);
 
-                    Rectangle rect = new Rectangle(i * cellSize, 0, cellSize, cellSize);
+                    Rectangle rect = new Rectangle(i * cellWidth, 0, cellWidth, cellHeight);
 
                     g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml(color.BackgroundColor)), rect);
                     g.DrawRectangle(new Pen(Color.White), rect);
@@ -113,7 +114,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellSize) / 3 * (settings.FontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+                    float size = Convert.ToSingle(cellWidth) / 3 * (settings.FontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
 
