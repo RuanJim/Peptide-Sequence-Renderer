@@ -34,9 +34,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
-            // (PEPTIDE1)(\{[^\}]+\})
-            // PEPTIDE\d+(\{(.+?)\})
-            Regex regex = new Regex(@"PEPTIDE1\{\[.*?_(.*?)\]\.(.*?)\}");
+            Regex regex = new Regex(@"PEPTIDE\d+\{(.+?)\}");
 
             var match = regex.Match(rendererArgs.DataValue.ValidValue.ToString());
 
@@ -50,9 +48,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             linkerList.AddRange(linkerString.Split(new char[] {'.'}));
 
-            peptideList.Add(match.Groups[1].Captures[0].Value);
-
-            peptideList.AddRange(match.Groups[2].Captures[0].Value.Split(new char[] { '.' }).ToArray());
+            peptideList.AddRange(match.Groups[1].Captures[0].Value.Split(new char[] { '_', '.' }).ToArray());
 
             int startIndex = peptideList.Count - linkerList.Count;
 
@@ -117,7 +113,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellSize) / Convert.ToSingle(monomer.Length) * 0.5f * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+                    float size = Convert.ToSingle(cellSize) / 3 * 0.5f * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
 
