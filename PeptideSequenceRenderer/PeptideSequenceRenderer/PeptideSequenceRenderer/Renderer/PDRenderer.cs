@@ -44,10 +44,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
 
             // TODO: Change spliter to "\n"
-            string linkerString = rendererArgs.DataValue.ValidValue.ToString()
-                .Split(new string[] {"\n"}, StringSplitOptions.None)[1];
+            string[] linkerStringArray = rendererArgs.DataValue.ValidValue.ToString()
+                .Split(new string[] {"\n"}, StringSplitOptions.None);
 
-            linkerList.AddRange(linkerString.Split(new char[] {'.'}));
+            if (linkerStringArray.Length == 2)
+            {
+                linkerList.AddRange(linkerStringArray[1].Split(new char[] { '.' }));
+            }
 
             peptideList.AddRange(match.Groups[1].Captures[0].Value.Split(new char[] { '_', '.' }).ToArray());
 
