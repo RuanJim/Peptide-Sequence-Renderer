@@ -33,7 +33,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
     public sealed class PDRenderAddin : AddIn
     {
         internal const int DefaultMaxAcidAmount = 20;
-        internal const int DefaultFontSize = 12;
+        internal const int DefaultFontSize = 80;
         internal static string DefaultFontFamily => "Tahoma";
 
         internal static bool ColorCodeTableLoaded = false;

@@ -113,7 +113,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellSize) / 3 * 0.5f * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+                    float size = Convert.ToSingle(cellSize) / 3 * (settings.FontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
 
