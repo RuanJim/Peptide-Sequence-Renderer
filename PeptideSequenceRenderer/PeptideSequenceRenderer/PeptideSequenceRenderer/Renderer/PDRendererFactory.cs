@@ -76,7 +76,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
         protected override object GetModelKeyCore(PDRenderSettings settings)
         {
-            return $"{settings.MaxAcidAmount},{settings.FontSize},{settings.DefaultFontColor},{settings.DefaultBackgroundColor},{settings.BranchMonomerFontColor},{settings.BranchMonomerBackgroundColor}";
+            return $"{settings.MaxAcidAmount},{settings.FontSize},{settings.FontFamily},{settings.DefaultFontColor},{settings.DefaultBackgroundColor},{settings.BranchMonomerFontColor},{settings.BranchMonomerBackgroundColor}";
         }
 
         protected override float GetRendererMatchCore(DataValueProperties dataValueProperties)
