@@ -34,19 +34,21 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
+            // (PEPTIDE1)(\{[^\}]+\})
+            // PEPTIDE1(\{(.+?)\})
             Regex regex = new Regex(@"PEPTIDE1\{\[.*?_(.*?)\]\.(.*?)\}");
 
             var match = regex.Match(rendererArgs.DataValue.ValidValue.ToString());
 
             List<string> peptideList = new List<string>();
-            List<char> linkerList = new List<char>();
+            List<string> linkerList = new List<string>();
 
 
             // TODO: Change spliter to "\n"
             string linkerString = rendererArgs.DataValue.ValidValue.ToString()
-                .Split(new string[] {"$$$"}, StringSplitOptions.None)[1];
+                .Split(new string[] {"\n"}, StringSplitOptions.None)[1];
 
-            linkerList.AddRange(linkerString.ToCharArray());
+            linkerList.AddRange(linkerString.Split(new char[] {'.'}));
 
             peptideList.Add(match.Groups[1].Captures[0].Value);
 
@@ -56,7 +58,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             for (var i = peptideList.Count - 1; i >= startIndex; i--)
             {
-                if (peptideList[i] == linkerList[i - startIndex].ToString())
+                if (peptideList[i] == linkerList[i - startIndex])
                 {
                     peptideList[i] = $"#{peptideList[i]}#";
                 }
