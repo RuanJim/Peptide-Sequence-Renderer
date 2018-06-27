@@ -36,11 +36,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
         internal const int DefaultFontSize = 80;
         internal static string DefaultFontFamily => "Tahoma";
 
-        internal static bool ColorCodeTableLoaded = false;
+        internal static bool ColorCodeTableLoaded => MonomerColorTable.Count > 0;
 
         internal static Dictionary<string, ColorSetting> MonomerColorTable { get; } =
             new Dictionary<string, ColorSetting>();
-
 
         internal static PDRenderPreference RendererPreference;
 
@@ -65,14 +64,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
             registrar.Register(typeof(Form), typeof(Models.PDRenderSettings), typeof(Views.PDRendererSettingsDialog));
         }
 
-        protected override void OnAnalysisServicesRegistered(ServiceProvider serviceProvider)
-        {
-            base.OnAnalysisServicesRegistered(serviceProvider);
-
-            GetMonomerColorTable(serviceProvider);
-        }
-
-        private static void GetMonomerColorTable(ServiceProvider serviceProvider)
+        internal static void GetMonomerColorTable(IServiceProvider serviceProvider)
         {
             MonomerColorTable.Clear();
 
@@ -111,8 +103,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
                         });
                     }
                 }
-
-                ColorCodeTableLoaded = true;
             }
             catch (Exception ex)
             {

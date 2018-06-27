@@ -42,9 +42,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             var settings = new PDRenderSettings();
 
+            if (!PDRenderAddin.ColorCodeTableLoaded)
+            {
+                PDRenderAddin.GetMonomerColorTable((IServiceProvider) settings);
+            }
+
             var preference = settings.GetService<PreferenceManager>().GetPreference<PDRenderPreference>();
 
-            //TODO: which one has a higher priority? admin preference or personal settings?
             settings.MaxAcidAmount = preference.MaxAminoAcids;
             settings.FontFamily = string.IsNullOrEmpty(preference.Font.ToString())
                 ? PDRenderAddin.DefaultFontFamily
