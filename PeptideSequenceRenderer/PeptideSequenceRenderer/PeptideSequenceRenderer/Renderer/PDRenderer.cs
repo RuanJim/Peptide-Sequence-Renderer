@@ -35,7 +35,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
             // (PEPTIDE1)(\{[^\}]+\})
-            // PEPTIDE1(\{(.+?)\})
+            // PEPTIDE\d+(\{(.+?)\})
             Regex regex = new Regex(@"PEPTIDE1\{\[.*?_(.*?)\]\.(.*?)\}");
 
             var match = regex.Match(rendererArgs.DataValue.ValidValue.ToString());
