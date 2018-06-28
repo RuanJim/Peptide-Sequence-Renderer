@@ -38,8 +38,14 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            _model.FontSize = int.Parse(fontSizeTextBox.Text);
-            _model.MaxAcidAmount = int.Parse(acidNumberTextBox.Text);
+            _model.FontSize = fontSizeTrackBar.Value;
+            _model.MaxAcidAmount = maxAcidNumberTrackBar.Value;
+        }
+
+        private void PDRendererSettingsDialog_Load(object sender, EventArgs e)
+        {
+            this.fontSizeTrackBar.Value = this._model.FontSize;
+            this.maxAcidNumberTrackBar.Value = this._model.MaxAcidAmount;
         }
     }
 }

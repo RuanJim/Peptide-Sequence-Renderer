@@ -34,8 +34,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.fontSizeLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.acidNumberTextBox = new System.Windows.Forms.TextBox();
-            this.fontSizeTextBox = new System.Windows.Forms.TextBox();
+            this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
+            this.maxAcidNumberTrackBar = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAcidNumberTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // acidNumberLabel
@@ -50,16 +52,16 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
-            this.fontSizeLabel.Location = new System.Drawing.Point(16, 71);
+            this.fontSizeLabel.Location = new System.Drawing.Point(16, 78);
             this.fontSizeLabel.Name = "fontSizeLabel";
-            this.fontSizeLabel.Size = new System.Drawing.Size(49, 13);
+            this.fontSizeLabel.Size = new System.Drawing.Size(69, 13);
             this.fontSizeLabel.TabIndex = 1;
-            this.fontSizeLabel.Text = "Font size";
+            this.fontSizeLabel.Text = "Font size (%):";
             // 
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(200, 103);
+            this.okButton.Location = new System.Drawing.Point(210, 129);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -70,34 +72,42 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(281, 103);
+            this.cancelButton.Location = new System.Drawing.Point(291, 129);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // acidNumberTextBox
+            // fontSizeTrackBar
             // 
-            this.acidNumberTextBox.Location = new System.Drawing.Point(158, 28);
-            this.acidNumberTextBox.Name = "acidNumberTextBox";
-            this.acidNumberTextBox.Size = new System.Drawing.Size(198, 20);
-            this.acidNumberTextBox.TabIndex = 4;
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(158, 75);
+            this.fontSizeTrackBar.Maximum = 100;
+            this.fontSizeTrackBar.Minimum = 20;
+            this.fontSizeTrackBar.Name = "fontSizeTrackBar";
+            this.fontSizeTrackBar.Size = new System.Drawing.Size(198, 45);
+            this.fontSizeTrackBar.TabIndex = 6;
+            this.fontSizeTrackBar.TickFrequency = 10;
+            this.fontSizeTrackBar.Value = 20;
             // 
-            // fontSizeTextBox
+            // maxAcidNumberTrackBar
             // 
-            this.fontSizeTextBox.Location = new System.Drawing.Point(158, 63);
-            this.fontSizeTextBox.Name = "fontSizeTextBox";
-            this.fontSizeTextBox.Size = new System.Drawing.Size(198, 20);
-            this.fontSizeTextBox.TabIndex = 5;
+            this.maxAcidNumberTrackBar.Location = new System.Drawing.Point(158, 28);
+            this.maxAcidNumberTrackBar.Maximum = 50;
+            this.maxAcidNumberTrackBar.Minimum = 1;
+            this.maxAcidNumberTrackBar.Name = "maxAcidNumberTrackBar";
+            this.maxAcidNumberTrackBar.Size = new System.Drawing.Size(198, 45);
+            this.maxAcidNumberTrackBar.TabIndex = 7;
+            this.maxAcidNumberTrackBar.TickFrequency = 10;
+            this.maxAcidNumberTrackBar.Value = 20;
             // 
             // PDRendererSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 139);
-            this.Controls.Add(this.fontSizeTextBox);
-            this.Controls.Add(this.acidNumberTextBox);
+            this.ClientSize = new System.Drawing.Size(378, 167);
+            this.Controls.Add(this.maxAcidNumberTrackBar);
+            this.Controls.Add(this.fontSizeTrackBar);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.fontSizeLabel);
@@ -110,6 +120,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Peptide Sequence Renderer";
+            this.Load += new System.EventHandler(this.PDRendererSettingsDialog_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAcidNumberTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,7 +134,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
         private System.Windows.Forms.Label fontSizeLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.TextBox acidNumberTextBox;
-        private System.Windows.Forms.TextBox fontSizeTextBox;
+        private System.Windows.Forms.TrackBar fontSizeTrackBar;
+        private System.Windows.Forms.TrackBar maxAcidNumberTrackBar;
     }
 }
