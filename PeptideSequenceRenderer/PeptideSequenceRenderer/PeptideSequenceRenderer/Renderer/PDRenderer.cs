@@ -119,7 +119,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                         };
                     }
 
-                    monomer = monomer.Replace("(", string.Empty).Replace(")", string.Empty);
+                    if (monomer.StartsWith("(") && monomer.EndsWith(")"))
+                    {
+                        monomer = monomer.Replace("(", string.Empty).Replace(")", string.Empty);
+                    }
+
                     monomer = monomer.Replace("#", string.Empty).Replace("#", string.Empty);
 
                     Rectangle rect = new Rectangle(i * cellWidth, 0, cellWidth, cellHeight);
