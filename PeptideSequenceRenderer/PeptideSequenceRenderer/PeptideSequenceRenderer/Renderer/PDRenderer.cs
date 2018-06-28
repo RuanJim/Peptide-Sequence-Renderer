@@ -35,17 +35,33 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             int cellHeight = rendererArgs.Height;
             int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
 
-            Regex regex = new Regex(@"PEPTIDE\d+\{(.+?)\}");
+            Regex regex = new Regex(@"PEPTIDE1\{(.+?)\}");
 
-            var match = regex.Match(rendererArgs.DataValue.ValidValue.ToString());
+            string cellValue = rendererArgs.DataValue.ValidValue.ToString();
+
+            if (!cellValue.Contains(".") || !regex.IsMatch(cellValue))
+            {
+                Bitmap defaultImage = new Bitmap(rendererArgs.Width, rendererArgs.Height);
+
+                using (Graphics g = Graphics.FromImage(defaultImage))
+                {
+                    g.DrawString(cellValue, new Font("Tahoma", 8), new SolidBrush(Color.Black), 0, 0);
+                }
+
+                renderingResult.SetImage(defaultImage);
+                renderingResult.SetTooltip("Not a valid peptide sequence.");
+
+                return;
+            }
+
+            var match = regex.Match(cellValue);
 
             List<string> peptideList = new List<string>();
             List<string> linkerList = new List<string>();
 
 
             // TODO: Change spliter to "\n"
-            string[] linkerStringArray = rendererArgs.DataValue.ValidValue.ToString()
-                .Split(new string[] {"\n"}, StringSplitOptions.None);
+            string[] linkerStringArray = cellValue.Split(new string[] {"\n"}, StringSplitOptions.None);
 
             if (linkerStringArray.Length == 2)
             {
