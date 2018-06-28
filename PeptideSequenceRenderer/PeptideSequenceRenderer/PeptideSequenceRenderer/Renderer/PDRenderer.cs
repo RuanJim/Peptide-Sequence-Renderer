@@ -101,7 +101,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                         color = PDRenderAddin.MonomerColorTable[monomer];
                     }
 
-                    if (monomer.StartsWith("(") && monomer.EndsWith(")"))
+                    if (monomer.Contains("(") && monomer.Contains(")"))
                     {
                         color = new ColorSetting
                         {
