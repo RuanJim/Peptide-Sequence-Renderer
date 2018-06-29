@@ -36,6 +36,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.cancelButton = new System.Windows.Forms.Button();
             this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
             this.maxAcidNumberTrackBar = new System.Windows.Forms.TrackBar();
+            this.acidNumberValueLabel = new System.Windows.Forms.Label();
+            this.fontSizeValueLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAcidNumberTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -45,9 +47,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.acidNumberLabel.AutoSize = true;
             this.acidNumberLabel.Location = new System.Drawing.Point(16, 28);
             this.acidNumberLabel.Name = "acidNumberLabel";
-            this.acidNumberLabel.Size = new System.Drawing.Size(136, 13);
+            this.acidNumberLabel.Size = new System.Drawing.Size(139, 13);
             this.acidNumberLabel.TabIndex = 0;
-            this.acidNumberLabel.Text = "Max number of amino acids";
+            this.acidNumberLabel.Text = "Max number of amino acids:";
             // 
             // fontSizeLabel
             // 
@@ -61,7 +63,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(210, 129);
+            this.okButton.Location = new System.Drawing.Point(303, 133);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -72,7 +74,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(291, 129);
+            this.cancelButton.Location = new System.Drawing.Point(384, 133);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 3;
@@ -81,7 +83,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             // 
             // fontSizeTrackBar
             // 
-            this.fontSizeTrackBar.Location = new System.Drawing.Point(158, 75);
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(261, 75);
             this.fontSizeTrackBar.Maximum = 100;
             this.fontSizeTrackBar.Minimum = 20;
             this.fontSizeTrackBar.Name = "fontSizeTrackBar";
@@ -89,10 +91,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.fontSizeTrackBar.TabIndex = 6;
             this.fontSizeTrackBar.TickFrequency = 10;
             this.fontSizeTrackBar.Value = 20;
+            this.fontSizeTrackBar.Scroll += new System.EventHandler(this.fontSizeTrackBar_Scroll);
             // 
             // maxAcidNumberTrackBar
             // 
-            this.maxAcidNumberTrackBar.Location = new System.Drawing.Point(158, 28);
+            this.maxAcidNumberTrackBar.Location = new System.Drawing.Point(261, 28);
             this.maxAcidNumberTrackBar.Maximum = 50;
             this.maxAcidNumberTrackBar.Minimum = 1;
             this.maxAcidNumberTrackBar.Name = "maxAcidNumberTrackBar";
@@ -100,12 +103,31 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
             this.maxAcidNumberTrackBar.TabIndex = 7;
             this.maxAcidNumberTrackBar.TickFrequency = 10;
             this.maxAcidNumberTrackBar.Value = 20;
+            this.maxAcidNumberTrackBar.Scroll += new System.EventHandler(this.maxAcidNumberTrackBar_Scroll);
+            // 
+            // acidNumberValueLabel
+            // 
+            this.acidNumberValueLabel.AutoSize = true;
+            this.acidNumberValueLabel.Location = new System.Drawing.Point(161, 28);
+            this.acidNumberValueLabel.Name = "acidNumberValueLabel";
+            this.acidNumberValueLabel.Size = new System.Drawing.Size(0, 13);
+            this.acidNumberValueLabel.TabIndex = 8;
+            // 
+            // fontSizeValueLabel
+            // 
+            this.fontSizeValueLabel.AutoSize = true;
+            this.fontSizeValueLabel.Location = new System.Drawing.Point(162, 78);
+            this.fontSizeValueLabel.Name = "fontSizeValueLabel";
+            this.fontSizeValueLabel.Size = new System.Drawing.Size(0, 13);
+            this.fontSizeValueLabel.TabIndex = 9;
             // 
             // PDRendererSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 167);
+            this.ClientSize = new System.Drawing.Size(471, 168);
+            this.Controls.Add(this.fontSizeValueLabel);
+            this.Controls.Add(this.acidNumberValueLabel);
             this.Controls.Add(this.maxAcidNumberTrackBar);
             this.Controls.Add(this.fontSizeTrackBar);
             this.Controls.Add(this.cancelButton);
@@ -136,5 +158,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.TrackBar fontSizeTrackBar;
         private System.Windows.Forms.TrackBar maxAcidNumberTrackBar;
+        private System.Windows.Forms.Label acidNumberValueLabel;
+        private System.Windows.Forms.Label fontSizeValueLabel;
     }
 }

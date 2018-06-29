@@ -92,9 +92,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
                 {
                     while (reader.MoveNext())
                     {
-                        var monomer = reader.Columns[0].Cursor.CurrentDataValue.ValidValue.ToString();
-                        var foreColor = reader.Columns[1].Cursor.CurrentDataValue.ValidValue.ToString();
-                        var backColor = reader.Columns[2].Cursor.CurrentDataValue.ValidValue.ToString();
+                        var monomer = reader.Columns["MONOMER"].Cursor.CurrentDataValue.ValidValue.ToString();
+                        var foreColor = reader.Columns["FORE_COLOR"].Cursor.CurrentDataValue.ValidValue.ToString();
+                        var backColor = reader.Columns["BACK_COLOR"].Cursor.CurrentDataValue.ValidValue.ToString();
 
                         MonomerColorTable.Add(monomer, new ColorSetting
                         {

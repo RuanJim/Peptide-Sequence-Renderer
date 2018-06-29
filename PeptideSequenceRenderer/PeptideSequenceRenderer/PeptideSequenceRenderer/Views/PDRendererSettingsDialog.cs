@@ -46,6 +46,27 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Views
         {
             this.fontSizeTrackBar.Value = this._model.FontSize;
             this.maxAcidNumberTrackBar.Value = this._model.MaxAcidAmount;
+
+            this.fontSizeValueLabel.Text = this._model.FontSize.ToString();
+            this.acidNumberValueLabel.Text = this._model.MaxAcidAmount.ToString();
+        }
+
+        private void maxAcidNumberTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.fontSizeValueLabel.Text = this._model.FontSize.ToString();
+            this.acidNumberValueLabel.Text = this._model.MaxAcidAmount.ToString();
+
+            _model.FontSize = fontSizeTrackBar.Value;
+            _model.MaxAcidAmount = maxAcidNumberTrackBar.Value;
+        }
+
+        private void fontSizeTrackBar_Scroll(object sender, EventArgs e)
+        {
+            this.fontSizeValueLabel.Text = this._model.FontSize.ToString();
+            this.acidNumberValueLabel.Text = this._model.MaxAcidAmount.ToString();
+
+            _model.FontSize = fontSizeTrackBar.Value;
+            _model.MaxAcidAmount = maxAcidNumberTrackBar.Value;
         }
     }
 }
