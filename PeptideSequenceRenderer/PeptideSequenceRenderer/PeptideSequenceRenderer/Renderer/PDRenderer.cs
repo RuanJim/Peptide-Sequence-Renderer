@@ -79,11 +79,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     peptideList.Add(saltMonomer[0] + "-");
                     peptideList.Add(saltMonomer[1]);
                 }
-                else if (i == 0 && !monomerArray[0].Contains("_"))
-                {
-                    peptideList.Add(string.Empty);
-                    peptideList.Add(monomerArray[0]);
-                }
                 else
                 {
                     peptideList.Add(monomerArray[i]);
