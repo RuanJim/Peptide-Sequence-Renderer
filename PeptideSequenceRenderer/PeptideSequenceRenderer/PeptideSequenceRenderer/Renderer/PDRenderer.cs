@@ -68,7 +68,27 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 linkerList.AddRange(linkerStringArray[1].Split(new char[] { '.' }));
             }
 
-            peptideList.AddRange(match.Groups[1].Captures[0].Value.Split(new char[] { '_', '.' }).ToArray());
+            string[] monomerArray = match.Groups[1].Captures[0].Value.Split(new char[] {'.'}).ToArray();
+
+            for (var i = 0; i < monomerArray.Length; i++)
+            {
+                if (i == 0 && monomerArray[0].Contains("_"))
+                {
+                    string[] saltMonomer = monomerArray[0].Split(new[] {'_'});
+
+                    peptideList.Add(saltMonomer[0] + "-");
+                    peptideList.Add(saltMonomer[1]);
+                }
+                else if (i == 0 && !monomerArray[0].Contains("_"))
+                {
+                    peptideList.Add(string.Empty);
+                    peptideList.Add(monomerArray[0]);
+                }
+                else
+                {
+                    peptideList.Add(monomerArray[i]);
+                }
+            }
 
             int startIndex = peptideList.Count - linkerList.Count;
 
@@ -89,11 +109,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 for (int i = 0; i < peptideList.Count && i < settings.MaxAcidAmount; i++)
                 {
                     string monomer = peptideList[i].Replace("[", string.Empty).Replace("]", string.Empty);
-
-                    if (i == 0)
-                    {
-                        monomer = monomer + "-";
-                    }
 
                     ColorSetting color = new ColorSetting
                     {
