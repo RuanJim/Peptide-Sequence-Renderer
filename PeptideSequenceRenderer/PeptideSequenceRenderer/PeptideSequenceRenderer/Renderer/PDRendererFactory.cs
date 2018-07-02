@@ -42,11 +42,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             var settings = new PDRenderSettings();
 
-            if (!PDRenderAddin.ColorCodeTableLoaded)
-            {
-                PDRenderAddin.GetMonomerColorTable((IServiceProvider) settings);
-            }
-
             var preference = settings.GetService<PreferenceManager>().GetPreference<PDRenderPreference>();
 
             settings.MaxAcidAmount = preference.MaxAminoAcids;

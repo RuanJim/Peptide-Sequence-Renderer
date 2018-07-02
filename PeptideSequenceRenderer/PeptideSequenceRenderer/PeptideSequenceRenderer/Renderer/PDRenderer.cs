@@ -90,6 +90,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 {
                     string monomer = peptideList[i].Replace("[", string.Empty).Replace("]", string.Empty);
 
+                    if (i == 0)
+                    {
+                        monomer = monomer + "-";
+                    }
+
                     ColorSetting color = new ColorSetting
                     {
                         ForeColor = settings.DefaultFontColor,
@@ -143,8 +148,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                     StringFormat sf = new StringFormat();
 
-                    sf.Alignment = StringAlignment.Center;
-                    sf.LineAlignment = StringAlignment.Center;
+                    sf.Alignment = StringAlignment.Near;
+                    sf.LineAlignment = StringAlignment.Near;
 
                     g.DrawString(monomer, font, new SolidBrush(ColorTranslator.FromHtml(color.ForeColor)), rect, sf);
                 }
