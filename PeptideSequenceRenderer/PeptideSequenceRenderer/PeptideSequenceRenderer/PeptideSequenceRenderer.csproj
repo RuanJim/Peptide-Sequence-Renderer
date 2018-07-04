@@ -147,4 +147,7 @@
   -->
   <PropertyGroup>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>$(ProjectDir)PeptideSequenceRenderer.bat</PostBuildEvent>
+  </PropertyGroup>
 </Project>
