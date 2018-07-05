@@ -35,6 +35,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             int cellHeight = rendererArgs.Height;
             int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
 
+            int fontSize = settings.FontSize;
+
+            if (rendererArgs.Width == rendererArgs.Height)
+            {
+                cellHeight = cellWidth;
+            }
+
             Regex regex = new Regex(@"PEPTIDE1\{(.+?)\}");
 
             string cellValue = rendererArgs.DataValue.ValidValue.ToString();
@@ -95,7 +102,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 }
             }
 
-            Bitmap bitmap = new Bitmap(rendererArgs.Width, rendererArgs.Height);
+            Bitmap bitmap = new Bitmap(cellWidth * settings.MaxAcidAmount, cellHeight);
 
             using (Graphics g = Graphics.FromImage(bitmap))
             {
@@ -152,7 +159,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellWidth) / 3 * (settings.FontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+                    float size = Convert.ToSingle(cellWidth) / 3 * (fontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
 
