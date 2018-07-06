@@ -46,20 +46,23 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         public PDRenderSettings()
         {
+            PDRenderAddin.GetMonomerColorTable(this);
+
             CreateProperty(PropertyNames.MaxAcidAmount, out _maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
             CreateProperty(PropertyNames.FontSize, out _fontSize, PDRenderAddin.DefaultFontSize);
             CreateProperty(PropertyNames.FontFamily, out _fontFamily, PDRenderAddin.DefaultFontFamily);
+
             CreateProperty(PropertyNames.DefaultFontColor, out _defaultFontColor, "#000000");
             CreateProperty(PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
             CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.ColorCodeTable, out this._colorTable, null);
-
-            PDRenderAddin.GetMonomerColorTable(this);
         }
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+            PDRenderAddin.GetMonomerColorTable(this);
+
             DeserializeProperty<int>(info, context, PropertyNames.MaxAcidAmount, out _maxAcidAmount);
             DeserializeProperty<int>(info, context, PropertyNames.FontSize, out _fontSize);
             DeserializeProperty<string>(info, context, PropertyNames.FontFamily, out _fontFamily);
@@ -70,7 +73,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor);
             DeserializeProperty<string>(info, context, PropertyNames.ColorCodeTable, out _colorTable);
 
-            PDRenderAddin.GetMonomerColorTable(this);
         }
 
         public int MaxAcidAmount
