@@ -46,8 +46,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         public PDRenderSettings()
         {
-            PDRenderAddin.GetMonomerColorTable(this);
-
             CreateProperty(PropertyNames.MaxAcidAmount, out _maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
             CreateProperty(PropertyNames.FontSize, out _fontSize, PDRenderAddin.DefaultFontSize);
             CreateProperty(PropertyNames.FontFamily, out _fontFamily, PDRenderAddin.DefaultFontFamily);
@@ -61,8 +59,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            PDRenderAddin.GetMonomerColorTable(this);
-
             DeserializeProperty<int>(info, context, PropertyNames.MaxAcidAmount, out _maxAcidAmount);
             DeserializeProperty<int>(info, context, PropertyNames.FontSize, out _fontSize);
             DeserializeProperty<string>(info, context, PropertyNames.FontFamily, out _fontFamily);
@@ -118,9 +114,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         public Dictionary<string, ColorSetting> ColorCodeTable
         {
-            get
+            get { return null; }
+            set
             {
-                return PDRenderAddin.MonomerColorTable;
+                
             }
         }
 
