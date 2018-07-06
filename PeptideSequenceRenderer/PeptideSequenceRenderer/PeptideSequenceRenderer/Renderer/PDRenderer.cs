@@ -118,9 +118,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                         BackgroundColor = settings.DefaultBackgroundColor
                     };
 
-                    if (PDRenderAddin.MonomerColorTable.ContainsKey(monomer))
+                    if (settings.ColorCodeTable.ContainsKey(monomer))
                     {
-                        color = PDRenderAddin.MonomerColorTable[monomer];
+                        color = settings.ColorCodeTable[monomer];
                     }
 
                     if (monomer.Contains("(") && monomer.Contains(")"))

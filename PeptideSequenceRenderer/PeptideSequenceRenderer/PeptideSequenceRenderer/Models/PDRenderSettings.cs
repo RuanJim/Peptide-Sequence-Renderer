@@ -14,6 +14,7 @@
 #region
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Spotfire.Dxp.Application.Extension;
 using Spotfire.Dxp.Framework.DocumentModel;
@@ -41,6 +42,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         private readonly UndoableProperty<int> _maxAcidAmount;
 
+        private readonly UndoableProperty<Dictionary<string, ColorSetting>> _colorTable;
+
         public PDRenderSettings()
         {
             CreateProperty(PropertyNames.MaxAcidAmount, out _maxAcidAmount, PDRenderAddin.DefaultMaxAcidAmount);
@@ -50,6 +53,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             CreateProperty(PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
             CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor, "#FFFFFF");
+            CreateProperty(PropertyNames.ColorCodeTable, out this._colorTable, null);
         }
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -62,6 +66,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             DeserializeProperty<string>(info, context, PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor);
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor);
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor);
+            DeserializeProperty<Dictionary<string, ColorSetting>>(info, context, PropertyNames.ColorCodeTable, out _colorTable);
         }
 
         public int MaxAcidAmount
@@ -106,6 +111,21 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             set { _branchMonomerBackgroundColor.Value = value; }
         }
 
+        public Dictionary<string, ColorSetting> ColorCodeTable
+        {
+            get
+            {
+                if (PDRenderAddin.MonomerColorTable.Count == 0)
+                {
+                    return this._colorTable.Value;
+                }
+                else
+                {
+                    return PDRenderAddin.MonomerColorTable;
+                }
+            }
+        }
+
         protected override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -117,6 +137,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             SerializeProperty<string>(info, context, _defaultBackgroundColor);
             SerializeProperty<string>(info, context, _branchMonomerFontColor);
             SerializeProperty<string>(info, context, _branchMonomerBackgroundColor);
+            SerializeProperty<Dictionary<string, ColorSetting>>(info, context, _colorTable);
         }
 
         protected override Trigger GetRenderTriggerCore()
@@ -140,6 +161,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             public static readonly PropertyName DefaultBackgroundColor = CreatePropertyName("DefaultBackgroundColor");
             public static readonly PropertyName BranchMonomerFontColor = CreatePropertyName("BranchMonomerFontColor");
             public static readonly PropertyName BranchMonomerBackgroundColor = CreatePropertyName("BranchMonomerBackgroundColor");
+            public static readonly PropertyName ColorCodeTable = CreatePropertyName("ColorCodeTable");
         }
     }
 
