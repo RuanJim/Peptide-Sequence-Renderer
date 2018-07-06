@@ -42,7 +42,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
 
         private readonly UndoableProperty<int> _maxAcidAmount;
 
-        private readonly UndoableProperty<Dictionary<string, ColorSetting>> _colorTable;
+        private readonly UndoableProperty<string> _colorTable;
 
         public PDRenderSettings()
         {
@@ -54,6 +54,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
             CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.ColorCodeTable, out this._colorTable, null);
+
+            PDRenderAddin.GetMonomerColorTable(this);
         }
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -66,7 +68,9 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             DeserializeProperty<string>(info, context, PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor);
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor);
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor);
-            DeserializeProperty<Dictionary<string, ColorSetting>>(info, context, PropertyNames.ColorCodeTable, out _colorTable);
+            DeserializeProperty<string>(info, context, PropertyNames.ColorCodeTable, out _colorTable);
+
+            PDRenderAddin.GetMonomerColorTable(this);
         }
 
         public int MaxAcidAmount
@@ -115,14 +119,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
         {
             get
             {
-                if (PDRenderAddin.MonomerColorTable.Count == 0)
-                {
-                    return this._colorTable.Value;
-                }
-                else
-                {
-                    return PDRenderAddin.MonomerColorTable;
-                }
+                return PDRenderAddin.MonomerColorTable;
             }
         }
 
@@ -137,7 +134,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             SerializeProperty<string>(info, context, _defaultBackgroundColor);
             SerializeProperty<string>(info, context, _branchMonomerFontColor);
             SerializeProperty<string>(info, context, _branchMonomerBackgroundColor);
-            SerializeProperty<Dictionary<string, ColorSetting>>(info, context, _colorTable);
+            SerializeProperty<string>(info, context, _colorTable);
         }
 
         protected override Trigger GetRenderTriggerCore()

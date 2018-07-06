@@ -64,18 +64,13 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
             registrar.Register(typeof(Form), typeof(Models.PDRenderSettings), typeof(Views.PDRendererSettingsDialog));
         }
 
-        protected override void OnAnalysisServicesRegistered(ServiceProvider serviceProvider)
-        {
-            base.OnUserServicesRegistered(serviceProvider);
-
-            if (!ColorCodeTableLoaded)
-            {
-                GetMonomerColorTable(serviceProvider);
-            }
-        }
-
         internal static void GetMonomerColorTable(IServiceProvider serviceProvider)
         {
+            if (ColorCodeTableLoaded)
+            {
+                return;
+            }
+
             MonomerColorTable.Clear();
 
             var preferenceManager = (PreferenceManager) serviceProvider.GetService(typeof(PreferenceManager));
