@@ -56,7 +56,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             CreateProperty(PropertyNames.DefaultBackgroundColor, out _defaultBackgroundColor, "#FFFFFF");
             CreateProperty(PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor, "#000000");
             CreateProperty(PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor, "#FFFFFF");
-            CreateProperty(PropertyNames.ColorCodeTable, out this._colorTable, null);
+            CreateProperty(PropertyNames.ColorCodeTable, out this._colorTable, string.Empty);
         }
 
         internal PDRenderSettings(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -72,7 +72,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Models
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerFontColor, out _branchMonomerFontColor);
             DeserializeProperty<string>(info, context, PropertyNames.BranchMonomerBackgroundColor, out _branchMonomerBackgroundColor);
             DeserializeProperty<string>(info, context, PropertyNames.ColorCodeTable, out _colorTable);
-
         }
 
         public int MaxAcidAmount
