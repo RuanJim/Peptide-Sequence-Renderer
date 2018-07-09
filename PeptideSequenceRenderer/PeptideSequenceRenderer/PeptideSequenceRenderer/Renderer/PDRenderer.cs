@@ -44,6 +44,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             Regex regex = new Regex(@"PEPTIDE1\{(.+?)\}");
 
+            if (!rendererArgs.DataValue.HasValidValue)
+            {
+                return;
+            }
+
             string cellValue = rendererArgs.DataValue.ValidValue.ToString();
 
             if (!cellValue.Contains(".") || !regex.IsMatch(cellValue))

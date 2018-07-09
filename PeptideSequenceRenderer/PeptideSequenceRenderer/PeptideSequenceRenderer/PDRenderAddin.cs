@@ -66,24 +66,24 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer
 
         internal static void GetMonomerColorTable(IServiceProvider serviceProvider)
         {
-            if (ColorCodeTableLoaded)
-            {
-                return;
-            }
-
-            MonomerColorTable.Clear();
-
-            var preferenceManager = (PreferenceManager) serviceProvider.GetService(typeof(PreferenceManager));
-
-            if (preferenceManager == null)
-            {
-                return;
-            }
-
-            RendererPreference = preferenceManager.GetPreference<PDRenderPreference>();
-
             try
             {
+                if (ColorCodeTableLoaded)
+                {
+                    return;
+                }
+
+                MonomerColorTable.Clear();
+
+                var preferenceManager = (PreferenceManager)serviceProvider.GetService(typeof(PreferenceManager));
+
+                if (preferenceManager == null)
+                {
+                    return;
+                }
+
+                RendererPreference = preferenceManager.GetPreference<PDRenderPreference>();
+
                 var informationLinkID = RendererPreference.ColorCodingInformationLinkGuid;
 
                 var informationLinkDescriptor =
