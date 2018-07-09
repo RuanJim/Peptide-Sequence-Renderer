@@ -36,23 +36,19 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             {
                 Bitmap defaultImage = new Bitmap(rendererArgs.Width, rendererArgs.Height);
 
-                using (Graphics g = Graphics.FromImage(defaultImage))
-                {
-                    g.DrawString(string.Empty, new Font("Tahoma", 8), new SolidBrush(Color.Black), 0, 0);
-                }
-
                 renderingResult.SetImage(defaultImage);
 
                 return;
             }
 
+            bool isLable = rendererArgs.Width == rendererArgs.Height;
 
             int cellHeight = rendererArgs.Height;
             int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
 
             int fontSize = settings.FontSize;
 
-            if (rendererArgs.Width == rendererArgs.Height)
+            if (isLable)
             {
                 cellHeight = cellWidth;
             }
@@ -175,6 +171,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
                     float size = Convert.ToSingle(cellWidth) / 3 * (fontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+
+                    if (isLable)
+                    {
+                        size = size * 2;
+                    }
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
 
