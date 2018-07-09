@@ -32,6 +32,16 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
+            if (settings.MaxAcidAmount == 0)
+            {
+                return;
+            }
+
+            if (!rendererArgs.DataValue.HasValidValue)
+            {
+                return;
+            }
+
             int cellHeight = rendererArgs.Height;
             int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
 
@@ -43,11 +53,6 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             }
 
             Regex regex = new Regex(@"PEPTIDE1\{(.+?)\}");
-
-            if (!rendererArgs.DataValue.HasValidValue)
-            {
-                return;
-            }
 
             string cellValue = rendererArgs.DataValue.ValidValue.ToString();
 
