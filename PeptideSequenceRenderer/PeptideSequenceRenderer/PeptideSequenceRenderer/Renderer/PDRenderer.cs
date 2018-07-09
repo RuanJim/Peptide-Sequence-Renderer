@@ -38,11 +38,10 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                 using (Graphics g = Graphics.FromImage(defaultImage))
                 {
-                    g.DrawString("No preference was set.", new Font("Tahoma", 8), new SolidBrush(Color.Black), 0, 0);
+                    g.DrawString(string.Empty, new Font("Tahoma", 8), new SolidBrush(Color.Black), 0, 0);
                 }
 
                 renderingResult.SetImage(defaultImage);
-                renderingResult.SetTooltip("Not a valid peptide sequence.");
 
                 return;
             }
