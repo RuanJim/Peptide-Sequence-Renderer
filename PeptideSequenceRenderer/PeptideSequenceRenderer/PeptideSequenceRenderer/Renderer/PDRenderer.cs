@@ -32,15 +32,21 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         {
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
-            if (settings.MaxAcidAmount == 0)
+            if (settings.MaxAcidAmount == 0 || !rendererArgs.DataValue.HasValidValue)
             {
+                Bitmap defaultImage = new Bitmap(rendererArgs.Width, rendererArgs.Height);
+
+                using (Graphics g = Graphics.FromImage(defaultImage))
+                {
+                    g.DrawString("No preference was set.", new Font("Tahoma", 8), new SolidBrush(Color.Black), 0, 0);
+                }
+
+                renderingResult.SetImage(defaultImage);
+                renderingResult.SetTooltip("Not a valid peptide sequence.");
+
                 return;
             }
 
-            if (!rendererArgs.DataValue.HasValidValue)
-            {
-                return;
-            }
 
             int cellHeight = rendererArgs.Height;
             int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;

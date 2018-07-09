@@ -49,7 +49,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Preference
                 "Max number of amino acids", 
                 "1.0", 
                 PreferencePersistenceScope.Server, 
-                PreferenceUsage.UserGroup));
+                PreferenceUsage.UserGroup, 
+                PDRenderAddin.DefaultMaxAcidAmount));
 
             _colorCodingInformationLinkGuid = AddPreference(new PreferenceProperty<string>(
                 "Color coding Information Link GUID", 
