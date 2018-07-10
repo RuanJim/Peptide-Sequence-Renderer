@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<PackageDescription xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SchemaVersion="1.0" Name="Peptide Sequence Renderer" Version="1.0.0.8" SeriesId="54DB094E-6C27-4778-8F4F-42CAE608FC10" IntendedClient="Core">
+<PackageDescription xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SchemaVersion="1.0" Name="Peptide Sequence Renderer" Version="1.0.0.9" SeriesId="54DB094E-6C27-4778-8F4F-42CAE608FC10" IntendedClient="Core">
   <File SourceFile="Com.PerkinElmer.Service.PeptideSequenceRenderer.dll" TargetFilename="Com.PerkinElmer.Service.PeptideSequenceRenderer.dll" Type="Assembly">
     <Compatibility Min-version="0.0.0.0" Max-version="#.#.*.*" />
   </File>

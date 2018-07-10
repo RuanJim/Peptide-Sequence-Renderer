@@ -10,6 +10,7 @@
 //     that authorizes such use.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 #region
 
 using System;
@@ -28,16 +29,27 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 {
     public sealed class PDRenderer : CustomValueRenderer
     {
-        protected override void RenderCore(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs, ValueRendererResult renderingResult)
+        protected override void RenderCore(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs,
+            ValueRendererResult renderingResult)
+        {
+            try
+            {
+                RenderPeptide(rendererSettings, rendererArgs, renderingResult);
+            }
+            catch
+            {
+                RenderNullImage(rendererArgs, renderingResult);
+            }
+        }
+
+        private static void RenderPeptide(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs,
+            ValueRendererResult renderingResult)
         {
             PDRenderSettings settings = (PDRenderSettings) rendererSettings;
 
             if (settings.MaxAcidAmount == 0 || !rendererArgs.DataValue.HasValidValue)
             {
-                Bitmap defaultImage = new Bitmap(rendererArgs.Width, rendererArgs.Height);
-
-                renderingResult.SetImage(defaultImage);
-
+                RenderNullImage(rendererArgs, renderingResult);
                 return;
             }
 
@@ -83,7 +95,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
             if (linkerStringArray.Length == 2)
             {
-                linkerList.AddRange(linkerStringArray[1].Split(new char[] { '.' }));
+                linkerList.AddRange(linkerStringArray[1].Split(new char[] {'.'}));
             }
 
             string[] monomerArray = match.Groups[1].Captures[0].Value.Split(new char[] {'.'}).ToArray();
@@ -113,7 +125,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 }
             }
 
-            Bitmap bitmap = new Bitmap(cellWidth * settings.MaxAcidAmount, cellHeight);
+            Bitmap bitmap = new Bitmap(cellWidth*settings.MaxAcidAmount, cellHeight);
 
             using (Graphics g = Graphics.FromImage(bitmap))
             {
@@ -159,7 +171,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                     monomer = monomer.Replace("#", string.Empty).Replace("#", string.Empty);
 
-                    Rectangle rect = new Rectangle(i * cellWidth, 0, cellWidth, cellHeight);
+                    Rectangle rect = new Rectangle(i*cellWidth, 0, cellWidth, cellHeight);
 
                     g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml(color.BackgroundColor)), rect);
                     g.DrawRectangle(new Pen(Color.White), rect);
@@ -170,11 +182,12 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellWidth) / 3 * (fontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) / (ascent + descent);
+                    float size = Convert.ToSingle(cellWidth)/3*(fontSize/100f)*fontFamily.GetEmHeight(FontStyle.Regular)/
+                                 (ascent + descent);
 
                     if (isLable)
                     {
-                        size = size * 2;
+                        size = size*2;
                     }
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
@@ -186,12 +199,17 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                     g.DrawString(monomer, font, new SolidBrush(ColorTranslator.FromHtml(color.ForeColor)), rect, sf);
                 }
-
             }
 
             renderingResult.SetImage(bitmap);
             renderingResult.SetTooltip(rendererArgs.DataValue.ValidValue.ToString());
+        }
 
+        private static void RenderNullImage(ValueRendererArgs rendererArgs, ValueRendererResult renderingResult)
+        {
+            Bitmap defaultImage = new Bitmap(rendererArgs.Width, rendererArgs.Height);
+
+            renderingResult.SetImage(defaultImage);
         }
     }
 }
