@@ -32,14 +32,15 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         protected override void RenderCore(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs,
             ValueRendererResult renderingResult)
         {
-            try
-            {
-                RenderPeptide(rendererSettings, rendererArgs, renderingResult);
-            }
-            catch
-            {
-                RenderNullImage(rendererArgs, renderingResult);
-            }
+            RenderPeptide(rendererSettings, rendererArgs, renderingResult);
+            //try
+            //{
+            //    RenderPeptide(rendererSettings, rendererArgs, renderingResult);
+            //}
+            //catch
+            //{
+            //    RenderNullImage(rendererArgs, renderingResult);
+            //}
         }
 
         private static void RenderPeptide(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs,
@@ -123,6 +124,16 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 {
                     peptideList[i] = $"#{peptideList[i]}#";
                 }
+            }
+
+            if (cellWidth <= 0)
+            {
+                cellWidth = 1;
+            }
+
+            if (cellHeight <= 0)
+            {
+                cellHeight = 1;
             }
 
             Bitmap bitmap = new Bitmap(cellWidth*settings.MaxAcidAmount, cellHeight);
