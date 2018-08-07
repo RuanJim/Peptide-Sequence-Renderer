@@ -196,6 +196,11 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float size = Convert.ToSingle(cellWidth)/3*(fontSize/100f)*fontFamily.GetEmHeight(FontStyle.Regular)/
                                  (ascent + descent);
 
+                    if (monomer.Length > 3)
+                    {
+                        size = size * 4.5f / monomer.Length;
+                    }
+
                     if (isLable)
                     {
                         size = size*2;
