@@ -205,8 +205,8 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                     StringFormat sf = new StringFormat();
 
-                    sf.Alignment = StringAlignment.Near;
-                    sf.LineAlignment = StringAlignment.Near;
+                    sf.Alignment = StringAlignment.Center;
+                    sf.LineAlignment = StringAlignment.Center;
 
                     g.DrawString(monomer, font, new SolidBrush(ColorTranslator.FromHtml(color.ForeColor)), rect, sf);
                 }
