@@ -46,7 +46,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
         private static void RenderPeptide(ValueRendererSettings rendererSettings, ValueRendererArgs rendererArgs,
             ValueRendererResult renderingResult)
         {
-            PDRenderSettings settings = (PDRenderSettings) rendererSettings;
+            PDRenderSettings settings = (PDRenderSettings)rendererSettings;
 
             if (settings.MaxAcidAmount == 0 || !rendererArgs.DataValue.HasValidValue)
             {
@@ -57,7 +57,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
             bool isLable = rendererArgs.Width == rendererArgs.Height;
 
             int cellHeight = rendererArgs.Height;
-            int cellWidth = rendererArgs.Width/settings.MaxAcidAmount;
+            int cellWidth = rendererArgs.Width / settings.MaxAcidAmount;
 
             int fontSize = settings.FontSize;
 
@@ -92,20 +92,20 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
 
             // TODO: Change spliter to "\n"
-            string[] linkerStringArray = cellValue.Split(new string[] {"\n"}, StringSplitOptions.None);
+            string[] linkerStringArray = cellValue.Split(new string[] { "\n" }, StringSplitOptions.None);
 
             if (linkerStringArray.Length == 2)
             {
-                linkerList.AddRange(linkerStringArray[1].Split(new char[] {'.'}));
+                linkerList.AddRange(linkerStringArray[1].Split(new char[] { '.' }));
             }
 
-            string[] monomerArray = match.Groups[1].Captures[0].Value.Split(new char[] {'.'}).ToArray();
+            string[] monomerArray = match.Groups[1].Captures[0].Value.Split(new char[] { '.' }).ToArray();
 
             for (var i = 0; i < monomerArray.Length; i++)
             {
                 if (i == 0 && monomerArray[0].Contains("_"))
                 {
-                    string[] saltMonomer = monomerArray[0].Split(new[] {'_'});
+                    string[] saltMonomer = monomerArray[0].Split(new[] { '_' });
 
                     peptideList.Add(saltMonomer[0] + "-");
                     peptideList.Add(saltMonomer[1]);
@@ -136,7 +136,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                 cellHeight = 1;
             }
 
-            Bitmap bitmap = new Bitmap(cellWidth*settings.MaxAcidAmount, cellHeight);
+            Bitmap bitmap = new Bitmap(cellWidth * settings.MaxAcidAmount, cellHeight);
 
             using (Graphics g = Graphics.FromImage(bitmap))
             {
@@ -182,7 +182,7 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
 
                     monomer = monomer.Replace("#", string.Empty).Replace("#", string.Empty);
 
-                    Rectangle rect = new Rectangle(i*cellWidth, 0, cellWidth, cellHeight);
+                    Rectangle rect = new Rectangle(i * cellWidth, 0, cellWidth, cellHeight);
 
                     g.FillRectangle(new SolidBrush(ColorTranslator.FromHtml(color.BackgroundColor)), rect);
                     g.DrawRectangle(new Pen(Color.White), rect);
@@ -193,17 +193,16 @@ namespace Com.PerkinElmer.Service.PeptideSequenceRenderer.Renderer
                     float ascent = fontFamily.GetCellAscent(FontStyle.Regular);
                     float descent = fontFamily.GetCellDescent(FontStyle.Regular);
 
-                    float size = Convert.ToSingle(cellWidth)/3*(fontSize/100f)*fontFamily.GetEmHeight(FontStyle.Regular)/
+                    float size = Convert.ToSingle(cellWidth) / 3 * (fontSize / 100f) * fontFamily.GetEmHeight(FontStyle.Regular) /
                                  (ascent + descent);
-
-                    if (monomer.Length > 3)
-                    {
-                        size = size * 4.5f / monomer.Length;
-                    }
 
                     if (isLable)
                     {
-                        size = size*2;
+                        size = size * 2;
+                    }
+                    else if (monomer.Length > 3)
+                    {
+                        size = size * 4.5f / monomer.Length;
                     }
 
                     Font font = new Font(fontFamily, size, FontStyle.Regular);
